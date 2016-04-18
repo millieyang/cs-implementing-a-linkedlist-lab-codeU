@@ -43,7 +43,7 @@ public class MyLinkedListTest {
 	 * Test method for {@link com.flatironschool.javacs.MyArrayList#MyArrayList()}.
 	 */
 	@Test
-	public void testMyArrayList() {
+	public void testMyLinkedList() {
 		assertThat(mll.size(), is(3));
 	}
 

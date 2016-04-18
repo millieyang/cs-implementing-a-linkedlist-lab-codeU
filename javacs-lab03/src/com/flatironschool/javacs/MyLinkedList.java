@@ -1,4 +1,4 @@
-/**
+/*
  * 
  */
 package com.flatironschool.javacs;
@@ -85,7 +85,13 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public void add(int index, E element) {
-		// TODO: fill this in
+		if(index == 0) {
+			head = new Node(element, head);
+		} else {
+			Node node = getNode(index-1);	
+			node.next = new Node(element, node.next);
+		}
+		size++;
 	}
 
 	@Override
@@ -146,7 +152,20 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public int indexOf(Object target) {
-		// TODO: fill this in
+		if (head == null) {
+			return -1;
+		}
+	
+		Node node = head;
+		int index = 0;
+		while (index < size) {
+			if (equals(target,node.cargo)) {
+				return index;
+			}
+			index = index + 1;
+			node = node.next;			
+		}
+		
 		return -1;
 	}
 
@@ -201,14 +220,46 @@ public class MyLinkedList<E> implements List<E> {
 
 	@Override
 	public boolean remove(Object obj) {
-		// TODO: fill this in
-		return false;
+		if (contains(obj) == false) {
+			return false;
+		}
+		else {
+			int index = indexOf(obj);
+			if (index == 0) {
+				head = head.next;
+				size--;
+				return true;
+			}
+			if (index == -1) {
+				return false;
+			}
+			if (index > 0) {
+				Node node = getNode(index-1);
+				node.next = node.next.next;
+				size--;
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
 	}
 
 	@Override
 	public E remove(int index) {
-		// TODO: fill this in
-		return null;
+		E element = get(index);
+		if (index < 0) {
+			return null;
+		}
+		if (index == 0){
+			head = head.next;
+		}
+		int i = 0;
+		Node node = getNode(index-1);
+		node.next = node.next.next;
+		size--;
+		return element;
+		
 	}
 
 	@Override
